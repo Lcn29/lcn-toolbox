@@ -20,3 +20,8 @@
 ## 搜索
 
 command + shift + g  可以进行全局搜索, 隐藏的也可以搜索
+
+
+## 强制退出程序
+
+command + option + esc  

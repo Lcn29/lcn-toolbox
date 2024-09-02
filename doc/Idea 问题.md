@@ -11,6 +11,7 @@
     arthas idea
     JRebel and XRebel
     RestfulToolkit-fix
+    arthas idea
 
 ## Idea 中使用 Rebel 插件热部署
 > 1. 按照官网的步骤安装 Rebel 插件
