@@ -1,5 +1,6 @@
 package io.github.lcn29.util;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -27,7 +28,7 @@ public class LambdaUtils {
             return CollectionUtils.emptyMap();
         }
         return list.stream()
-            .collect(Collectors.toMap(key, Function.identity(), (p1, p2) -> p1));
+                .collect(Collectors.toMap(key, Function.identity(), (p1, p2) -> p1));
     }
 
     /**
@@ -63,5 +64,64 @@ public class LambdaUtils {
         }
         return list.stream().collect(Collectors.groupingBy(key));
     }
+
+
+    /**
+     * 升序排序
+     *
+     * @param list         集合
+     * @param keyExtractor key 提取器
+     * @param <T>          集合元素类型
+     * @param <U>          key 类型
+     * @return 排序后的集合
+     */
+    public static <T, U extends Comparable<U>> List<T> orderBy(List<T> list, Function<T, U> keyExtractor) {
+
+        if (CollectionUtils.isEmpty(list)) {
+            return CollectionUtils.emptyList();
+        }
+        return list.stream()
+                .sorted(Comparator.comparing(keyExtractor))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 降序排序
+     *
+     * @param list         集合
+     * @param keyExtractor key 提取器
+     * @param <T>          集合元素类型
+     * @param <U>          key 类型
+     * @return 排序后的集合
+     */
+    public static <T, U extends Comparable<U>> List<T> orderByDesc(List<T> list, Function<T, U> keyExtractor) {
+
+        if (CollectionUtils.isEmpty(list)) {
+            return CollectionUtils.emptyList();
+        }
+        return list.stream()
+                .sorted(Comparator.comparing(keyExtractor).reversed())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 降序排序
+     *
+     * @param list         集合
+     * @param keyExtractor key 提取器
+     * @param <T>          集合元素类型
+     * @param <U>          key 类型
+     * @return 排序后的集合
+     */
+    public static <T, U extends Comparable<U>> List<T> orderByDesc(List<T> list, Function<T, U> keyExtractor, Function<T, U> keyExtractor2) {
+
+        if (CollectionUtils.isEmpty(list)) {
+            return CollectionUtils.emptyList();
+        }
+        return list.stream()
+                .sorted(Comparator.comparing(keyExtractor).thenComparing(keyExtractor2))
+                .collect(Collectors.toList());
+    }
+
 
 }
